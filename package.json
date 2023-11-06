@@ -5,7 +5,7 @@
   "main": "client.js",
   "scripts": {
     "test": "node client.js",
-    "save": "git ci -am event-emitters-example && git push"
+    "save": "git ci -am event-emitters-example && git push -u origin main"
   },
   "keywords": [],
   "author": "Casiano Rodriguez-Leon <casiano.rodriguez.leon@gmail.com> (https://github.com/crguezl)",
