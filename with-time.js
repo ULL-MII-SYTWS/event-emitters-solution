@@ -4,19 +4,18 @@ const { EventEmitter } = require("events");
 
 class WithTime extends EventEmitter {
 
-  // This function executes asyncFunc(...args)
   execute(asyncFunc, ...args) {
-    let label = asyncFunc.name;
+    let funName = asyncFunc.name;
 
-    this.emit('begin', label);
+    this.emit('begin', funName);
     let old = process.hrtime.bigint();
     asyncFunc(...args, (err, data) => {
       if (err) { 
-        this.emit('error', label, err); 
+        this.emit('error', funName, err); 
       } else {
-        this.emit('result', label, data);
-        this.emit('time', label, process.hrtime.bigint() - old);
-        this.emit('end', label);
+        this.emit('result', funName, data);
+        this.emit('time', funName, process.hrtime.bigint() - old);
+        this.emit('end', funName);
       }
     });
   }

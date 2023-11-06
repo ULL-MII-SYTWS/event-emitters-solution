@@ -1,18 +1,18 @@
 const inspect = require("util").inspect;
 const ins = (x) => inspect(x, {depth: Infinity, colors: true});
-const fetch = require("node-fetch");
+const fetch = require("node-fetch"); // not needed in the browser or if node version is >= than18 
 const WithTime = require("./with-time.js");
 
 const withTime = new WithTime();
 
-withTime.on('begin', (label) => console.log('About to execute '+label));
+withTime.on('begin', (funName) => console.log('About to execute '+funName));
 
-withTime.on('end', (label) => console.log('Done with execution of '+label));
+withTime.on('end', (funName) => console.log('Done with execution of '+funName));
 
-withTime.on('result', (label, data) => console.log('Function '+label+' produced:\n'+ins(data)));
-withTime.on('error', (label, error) => console.log('Function '+label+' error:\n'+ins(error)));
+withTime.on('result', (funName, data) => console.log('Function '+funName+' produced:\n'+ins(data)));
+withTime.on('error', (funName, error) => console.log('Function '+funName+' error:\n'+ins(error)));
 
-withTime.on('time', (label, t) => console.log('Function '+label+' took '+t+' nanoseconds'));
+withTime.on('time', (funName, t) => console.log('Function '+funName+' took '+t+' nanoseconds'));
 
 const readFile = (url, cb) => {
   fetch(url)
